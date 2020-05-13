@@ -20,7 +20,6 @@ store=window.localStorage.getItem('condition');
 (function setup(){
 
   var time=setInterval(()=>{
-    console.log(clickedGas);
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
     rotcircle.draw();

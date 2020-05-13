@@ -8,6 +8,7 @@ function Pilot(){
   // this.a=3;
   this.draw=function(){
     ctx.beginPath();
+    ctx.lineWidth=1;
     ctx.strokeStyle=this.color[this.a];
     ctx.arc(this.x1, this.y1, 17.5, 0, 2 * Math.PI);
     ctx.fillStyle=this.color[this.a];

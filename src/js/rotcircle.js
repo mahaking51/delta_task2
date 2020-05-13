@@ -108,7 +108,23 @@ function drawStar(x,y){
   ctx.fillText("★", x, y+15);
 }
 
+function arrCheck3(a,b){
+  flag=1
+  for (var j=0;j<3;j++){
+    if(a[j]===b[j]){
+      flag=1
+    }
+    else if((a[j]+1)===b[j] || (b[j]+1)===a[j]){
+      flag=1
+    }
 
+    else{
+      flag=0
+      break;
+    }
+  }
+  return flag;
+}
 function Circle(){
 
   this.x=canvas.width/2;
@@ -198,7 +214,7 @@ function Circle(){
   this.rotate=function(){
     for(var i =0;i<this.obstacles.length;i++){
 
-      this.obstacles[i].deg +=2*(i+1)*Math.PI/180
+      this.obstacles[i].deg +=3*Math.PI/180
       if(this.obstacles[i].deg>2*Math.PI){
         this.obstacles[i].deg=0;
       }
@@ -230,26 +246,26 @@ function Circle(){
       ind++;
     }
     if(!(ind >=1 && this.obstacles[ind-1].y-d/2-pilot.y1>=-50 && this.obstacles[ind-1].y-d/2-pilot.y1<=20 && !tc)){
-    var c=ctx.getImageData(pilot.x1,pilot.y1-35,1,1).data;
-    var sidesR=ctx.getImageData(pilot.x1+34,pilot.y1,1,1).data;
-    var sidesL=ctx.getImageData(pilot.x1-34,pilot.y1,1,1).data;
+    var c=ctx.getImageData(pilot.x1,pilot.y1-19,1,1).data;
+    var sidesR=ctx.getImageData(pilot.x1+19,pilot.y1,1,1).data;
+    var sidesL=ctx.getImageData(pilot.x1-19,pilot.y1,1,1).data;
 
     var p=ctx.getImageData(pilot.x1,pilot.y1,1,1).data;
     var k=[0,0,0,0]
-    var st1=[255,255,255,199]
+    var st1=[255,255,255,190]
     var st=[255,255,255,255];
     var colorChanger=[244,252,193,255];
     // console.log(c,sidesL,sidesR,p);
 
         if(!arrCheck(c,k) && !arrCheck(p,st) &&!arrCheck(c,st1) &&!arrCheck(p,k) && !arrCheck(c,st) &&!arrCheck(c,colorChanger)  ){
-        if(arrCheck(c,p) && arrCheck(sidesR,p) ){
-          // console.log(c,p);
+        if(arrCheck3(c,p) && arrCheck3(sidesR,p) ){
+          console.log(c,p);
 
             // console.log('collision');
       
         }
         
-        if(!arrCheck(c,p)  ){
+        if(!arrCheck3(c,p)  ){
           console.log(c,p);
             hit=true
             this.stop=true ; 
@@ -258,23 +274,14 @@ function Circle(){
       
           
         }
-        // if(arrCheck(c,colorChanger)){
-        //   console.log('color changer');
-          
-        //   pilot.a=Math.round(Math.random()*3);
-        // }
+        
     
     }
-    if( !arrCheck(p,st) &&!arrCheck(c,st1) &&!arrCheck(p,k) && !arrCheck(c,st) &&!arrCheck(c,colorChanger) && !arrCheck(sidesR,k) && !arrCheck(sidesL,k) ){
-      if(arrCheck(c,p) && arrCheck(sidesR,p) ){
-        // console.log(c,p);
-
-          // console.log('collision');
-    
-      }
+    if( !arrCheck(p,st) &&!arrCheck(c,st1) &&!arrCheck(p,k) && !arrCheck(c,st) &&!arrCheck(c,colorChanger) && !arrCheck(sidesR,k) && !arrCheck(sidesL,k) &&!arrCheck(sidesL,st) &&!arrCheck(sidesR,st)){
       
-      if( !arrCheck(sidesR,p) || !arrCheck(sidesL,p) ){
-        // console.log(c,p);
+      
+      if( !arrCheck3(sidesR,p) || !arrCheck3(sidesL,p) ){
+        console.log(c,p,sidesL,sidesR);
         hit=true
           this.stop=true ;    
           gameoverMusic.play();    
@@ -293,7 +300,6 @@ function Circle(){
   }
 
   this.moveUp=function(){
-    console.log(clickedGas);
     
     this.scoresPrint();
       highscoreMusic.play();
@@ -303,7 +309,7 @@ function Circle(){
 
       this.score=this.score+1;
       if(this.obstacles[this.obstacles.length-1].y > d){
-        if(this.obstacles.length%2==0  ){
+        if(this.obstacles.length%2===0  ){
         this.obstacles.push({x:this.x1,y:this.y1,deg:this.deg,star:true,ccolor:true,type:'square'})
 
         }

@@ -149,7 +149,6 @@ function changeColorCircle1(x,y){
         this.highScore=this.score;
         if(newHighScore){
         highScoreDisplay1();
-        rotcircle.
         newHighScoreDisplayTime+=1
         if(newHighScoreDisplayTime===15){
           newHighScore=false;
@@ -169,7 +168,7 @@ function changeColorCircle1(x,y){
     this.rotate=function(){
       for(var i =0;i<this.obstacles.length;i++){
   
-        this.obstacles[i].deg +=2*(i+1)*Math.PI/180
+        this.obstacles[i].deg +=4*Math.PI/180
         if(this.obstacles[i].deg>2*Math.PI){
           this.obstacles[i].deg=0;
         }
@@ -199,10 +198,10 @@ function changeColorCircle1(x,y){
         ind++;
       }
       if(!(ind >=1 && this.obstacles[ind-1].y-d/2-pilot1.y1>=-50 && this.obstacles[ind-1].y-d/2-pilot1.y1<=20 && !tc)){
-      var c=ctx2.getImageData(pilot1.x1,pilot1.y1-35,1,1).data;
+      var c=ctx2.getImageData(pilot1.x1,pilot1.y1-19,1,1).data;
       var p=ctx2.getImageData(pilot1.x1,pilot1.y1,1,1).data;
-      var sidesR=ctx2.getImageData(pilot1.x1+35,pilot1.y1,1,1).data;
-      var sidesL=ctx2.getImageData(pilot1.x1-35,pilot1.y1,1,1).data;
+      var sidesR=ctx2.getImageData(pilot1.x1+19,pilot1.y1,1,1).data;
+      var sidesL=ctx2.getImageData(pilot1.x1-19,pilot1.y1,1,1).data;
   
       var k=[0,0,0,0]
       var st1=[255,255,255,199]
@@ -210,7 +209,7 @@ function changeColorCircle1(x,y){
       var colorChanger=[244,252,193,255];
 
       if(!arrCheck(c,k) && !arrCheck(p,st) &&!arrCheck(c,st1) &&!arrCheck(p,k) && !arrCheck(c,st) &&!arrCheck(c,colorChanger)  ){
-          if(arrCheck(c,p) ){
+          if(arrCheck3(c,p) ){
           }
           else{
             console.log(c,p);
@@ -223,7 +222,7 @@ function changeColorCircle1(x,y){
       }
       if( !arrCheck(p,st) &&!arrCheck(c,st1) &&!arrCheck(p,k) && !arrCheck(c,st) &&!arrCheck(c,colorChanger) && !arrCheck(sidesR,k) && !arrCheck(sidesL,k) ){
         
-        if( !arrCheck(sidesR,p) || !arrCheck(sidesL,p) ){
+        if( !arrCheck3(sidesR,p) || !arrCheck3(sidesL,p) ){
   
             this.stop=true ;      
             gameoverMusic.play();        
