@@ -14,12 +14,14 @@ var tpower1=0;
 var power2=false;
 var intTime=0;
 var hit=false;
+var clickedGas=false;
 store=window.localStorage.getItem('condition');
 
 (function setup(){
 
   var time=setInterval(()=>{
-    
+    console.log(clickedGas);
+
     ctx.clearRect(0,0,canvas.width,canvas.height);
     rotcircle.draw();
     instDisplay();
@@ -35,8 +37,9 @@ if(!power1){
 }
     
     document.addEventListener('keydown',keypressed);
+    document.addEventListener('click',clickedMove);
     // document.addEventListener('keyup',keyreleased);
-    if(pressedGas===true){
+    if(pressedGas===true ||clickedGas){
       rotcircle.moveUp()
   }
     if(!pressedGas){
@@ -110,7 +113,7 @@ function instDisplay(){
   ctx.font = "20px Comic Sans MS";
   ctx.fillStyle='#ffeb99';
   ctx.textAlign = "center";
-  ctx.fillText("Press Arrow up rapidly to make the ball bounce", canvas.width/2, canvas.height*0.7);
+  ctx.fillText("Press Arrow up or tap rapidly to make the ball bounce", canvas.width/2, canvas.height*0.7);
   ctx.font = "20px Comic Sans MS";
   ctx.fillStyle='#ffeb99';
   ctx.textAlign = "center";
@@ -156,6 +159,9 @@ function pauseDisplay(){
   ctx.fillStyle='#ffeb99';
   ctx.textAlign = "center";
   ctx.fillText("PAUSE", 300, 90);
+}
+function clickedMove(){
+ clickedGas=true;
 }
 function keypressed(evt){
 	if(evt.keyCode===KEY_UP){

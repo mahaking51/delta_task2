@@ -293,12 +293,12 @@ function Circle(){
   }
 
   this.moveUp=function(){
-    console.log(power1);
+    console.log(clickedGas);
     
     this.scoresPrint();
       highscoreMusic.play();
 
-    if(pressedGas && !this.stop){
+    if((pressedGas||clickedGas) && !this.stop){
       this.scoresPrint();
 
       this.score=this.score+1;
@@ -322,6 +322,7 @@ function Circle(){
         if(initVelocity<-30){
           pressedGas=false;
           initVelocity=30
+          clickedGas=false;
       }
 
       }
